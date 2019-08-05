@@ -9,7 +9,7 @@ public class Client {
 
     private String id;
     private String fullName;
-    
+
     public Client(String id, String name) {
         this.id = id;
         this.fullName = name;

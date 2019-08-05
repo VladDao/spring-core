@@ -15,6 +15,7 @@ public class CacheFileEventLogger extends FileEventLogger {
         this.cacheSize = cacheSize;
     }
 
+    @Override
     public void logEvent(Event event) {
         cache.add(event);
         if (cache.size() >= cacheSize) {
