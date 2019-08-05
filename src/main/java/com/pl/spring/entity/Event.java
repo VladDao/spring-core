@@ -1,4 +1,4 @@
-package com.pl.spring;
+package com.pl.spring.entity;
 
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;

@@ -1,5 +1,6 @@
-package com.pl.spring;
+package com.pl.spring.logger;
 
+import com.pl.spring.entity.Event;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
@@ -14,7 +15,7 @@ public class FileEventLogger implements EventLogger {
     private File file;
     private String fileName;
 
-    FileEventLogger(String fileName) {
+    public FileEventLogger(String fileName) {
         this.fileName = fileName;
     }
 

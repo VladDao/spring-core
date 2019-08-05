@@ -1,13 +1,15 @@
 package com.pl.spring;
 
+import com.pl.spring.entity.Event;
+import com.pl.spring.logger.EventLogger;
 import lombok.Data;
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @Data
 public class App {
 
-    private static ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+    private static ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
     private Client client;
     private EventLogger eventLogger;
 
@@ -23,6 +25,7 @@ public class App {
         String message = msg.replaceAll(
                 client.getId(), client.getFullName());
         Event event = (Event) ctx.getBean("event");
+        event.setMsg(message);
         eventLogger.logEvent(event);
     }
 
@@ -30,5 +33,6 @@ public class App {
         App app = (App) ctx.getBean("app");
         app.logEvent("Some event for user 1");
         app.logEvent("Some event for user 2");
+        ctx.close();
     }
 }
