@@ -26,7 +26,7 @@
     <bean id="app" class="com.pl.spring.App">
         <constructor-arg index="0" ref="client"/>
         <constructor-arg index="1" ref="cacheFileEventLogger"/>
-<!--        <constructor-arg index="1" ref="fileEventLogger"/>-->
+        <!--        <constructor-arg index="1" ref="fileEventLogger"/>-->
         <!--        <constructor-arg index="1" ref="fileEventLogger"/>-->
     </bean>
 

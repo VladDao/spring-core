@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 public class FileEventLogger implements EventLogger {
 
     private static final Logger LOGGER = Logger.getLogger(FileEventLogger.class);
-
     private File file;
     private String fileName;
 
