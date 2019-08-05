@@ -6,7 +6,7 @@ public class ConsoleEventLogger implements EventLogger {
 
     public static final Logger LOGGER = Logger.getLogger(ConsoleEventLogger.class);
 
-    public void logEvent(String msg) {
+    public void logEvent(Event msg) {
         LOGGER.info(msg);
     }
 }

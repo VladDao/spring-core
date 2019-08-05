@@ -7,8 +7,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 @Data
 public class App {
 
+    private static ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
     private Client client;
-
     private EventLogger eventLogger;
 
     public App() {
@@ -22,11 +22,12 @@ public class App {
     public void logEvent(String msg) {
         String message = msg.replaceAll(
                 client.getId(), client.getFullName());
-        eventLogger.logEvent(message);
+        Event event = (Event) ctx.getBean("event");
+        event.setMsg(message);
+        eventLogger.logEvent(event);
     }
 
     public static void main(String... args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) ctx.getBean("app");
         app.logEvent("Some event for user 1");
         app.logEvent("Some event for user 2");
