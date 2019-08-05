@@ -13,9 +13,15 @@
     <bean id="eventLogger"
           class="com.pl.spring.ConsoleEventLogger"/>
 
+    <bean id="fileEventLogger"
+          class="com.pl.spring.FileEventLogger" init-method="init">
+        <constructor-arg value="test.txt"/>
+    </bean>
+
     <bean id="app" class="com.pl.spring.App">
         <constructor-arg index="0" ref="client"/>
-        <constructor-arg index="1" ref="eventLogger"/>
+        <constructor-arg index="1" ref="fileEventLogger"/>
+<!--        <constructor-arg index="1" ref="fileEventLogger"/>-->
     </bean>
 
     <bean id="dateFormat"

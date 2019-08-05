@@ -35,4 +35,6 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-context', version: springVersion
     compile group: 'org.springframework', name: 'spring-tx', version: springVersion
     compile group: 'org.springframework', name: 'spring-jdbc', version: springVersion
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
 }

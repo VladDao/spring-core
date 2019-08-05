@@ -23,7 +23,6 @@ public class App {
         String message = msg.replaceAll(
                 client.getId(), client.getFullName());
         Event event = (Event) ctx.getBean("event");
-        event.setMsg(message);
         eventLogger.logEvent(event);
     }
 

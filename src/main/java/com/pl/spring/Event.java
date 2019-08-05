@@ -33,6 +33,6 @@ public class Event {
                 .append("id", id)
                 .append("message", msg)
                 .append("date", df.format(date))
-                .toString();
+                .toString().concat(System.lineSeparator());
     }
 }
