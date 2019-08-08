@@ -5,30 +5,23 @@
             http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="loggers.xml"/>
     <bean id="client" class="com.pl.spring.Client">
         <constructor-arg index="0" value="1"/>
         <constructor-arg index="1" value="John Smith"/>
-    </bean>
-
-    <bean id="eventLogger"
-          class="com.pl.spring.logger.ConsoleEventLogger"/>
-
-    <bean id="fileEventLogger"
-          class="com.pl.spring.logger.FileEventLogger" init-method="init">
-        <constructor-arg value="test.txt"/>
-    </bean>
-    <bean id="cacheFileEventLogger"
-          class="com.pl.spring.logger.CacheFileEventLogger"
-          parent="fileEventLogger"
-          destroy-method="destroy">
-         <constructor-arg value="2"/>
+        <property name="greeting" value="Hello there!"/>
     </bean>
 
     <bean id="app" class="com.pl.spring.App">
         <constructor-arg index="0" ref="client"/>
-        <constructor-arg index="1" ref="cacheFileEventLogger"/>
-        <!--        <constructor-arg index="1" ref="fileEventLogger"/>-->
-        <!--        <constructor-arg index="1" ref="fileEventLogger"/>-->
+        <constructor-arg index="1" ref="consoleEventLogger"/>
+        <constructor-arg index="2">
+            <map>
+                <entry key="INFO" value-ref="consoleEventLogger"/>
+                <entry key="ERROR" value-ref="combinedEventLogger"/>
+            </map>
+        </constructor-arg>
+
     </bean>
 
     <bean id="dateFormat"

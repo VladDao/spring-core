@@ -9,6 +9,7 @@ public class Client {
 
     private String id;
     private String fullName;
+    private String gr;
 
     public Client(String id, String name) {
         this.id = id;
@@ -18,11 +19,16 @@ public class Client {
     public Client() {
     }
 
+    public void setGreeting(String gr) {
+        this.gr = gr;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
                 .append("name", fullName)
+                .append("Greeting", gr)
                 .toString();
     }
 }
