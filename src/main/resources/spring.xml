@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-            http://www.springframework.org/schema/beans
-            http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/util
+            https://www.springframework.org/schema/util/spring-util.xsd">
 
     <import resource="loggers.xml"/>
+
+    <util:map id="loggerMap">
+        <entry key="INFO" value-ref="consoleEventLogger"/>
+        <entry key="ERROR" value-ref="combinedEventLogger"/>
+    </util:map>
+
     <bean id="client" class="com.pl.spring.Client">
-        <constructor-arg index="0" value="1"/>
-        <constructor-arg index="1" value="John Smith"/>
-        <property name="greeting" value="Hello there!"/>
+        <constructor-arg index="0" value="${id}"/>
+        <constructor-arg index="1" value="${name}"/>
+        <property name="greeting" value="${greeting}"/>
     </bean>
 
-    <bean id="app" class="com.pl.spring.App">
+    <bean id="app" class="com.pl.spring.App" c:loggerMap-ref="loggerMap">
         <constructor-arg index="0" ref="client"/>
         <constructor-arg index="1" ref="consoleEventLogger"/>
-        <constructor-arg index="2">
-            <map>
-                <entry key="INFO" value-ref="consoleEventLogger"/>
-                <entry key="ERROR" value-ref="combinedEventLogger"/>
-            </map>
-        </constructor-arg>
-
     </bean>
 
     <bean id="dateFormat"
@@ -32,5 +35,12 @@
         </constructor-arg>
         <constructor-arg ref="dateFormat"/>
     </bean>
-
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:client.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+    </bean>
 </beans>
